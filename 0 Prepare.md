@@ -2,35 +2,34 @@
 
 # Step0
 检查准备环境
+折腾了几次，最后都没成功，找到这个帖子，是用镜像来做的
 
-克隆实验代码
+https://zhuanlan.zhihu.com/p/442656932?utm_id=0
 
-```git clone https://pdos.csail.mit.edu/6.828/2018/jos.git lab```
+# 记录一下使用这个镜像的具体步骤
 
-编译工具链
+## 1.使用的是2021年的教程
+https://pdos.csail.mit.edu/6.S081/2021/tools.html
 
-```
-gcc -m32 -print-libgcc-file-name
-#输出 /usr/lib/gcc/x86_64-redhat-linux/4.8.5/32/libgcc.a 则正常
-```
+LInux CentOS7机器
+安装了docker镜像，ubuntu 20.04，
 
-QEMU模拟器
+对了做一切之前记得update or upgrade（update和upgrade的简单区别是：一个保存一切，一个旧的不保留了）
 
-#GitHub可能访问速度慢，需要挂梯子
+update or upgrade 这个话还不理解
 
-```git clone https://github.com/mit-pdos/6.828-qemu.git qemu```
+# 镜像的使用
+docker images 来列出本地主机上的镜像。
+![image](https://github.com/MoXQian/MIT6.s081/assets/62004141/99dc8a68-a2e2-429d-9400-14dbc0b1822c)
 
-这里暂时报错：
+各个选项说明:
+REPOSITORY：表示镜像的仓库源
+TAG：镜像的标签
+IMAGE ID：镜像ID
+CREATED：镜像创建时间
+SIZE：镜像大小
 
-```
-# git clone https://pdos.csail.mit.edu/6.828/2018/jos.git lab
-Cloning into 'lab'...
-# 作者: 扎克蕉
-bash: 作者:: command not found
-# 链接: https://www.515code.com/posts/r1eiw7kt/
-bash: 链接:: command not found
-# 来源: 515code-实验室
-bash: 来源:: command not found
-# 著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
-bash: 著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。: command not found
-```
+要使用该镜像来运行容器时
+docker run -t -i REPOSITORY:TAG /bin/bash
+
+docker run -t -i lebronlambert/ubuntu20.04-mit6.s801-2021-initenv:latest /bin/bash
