@@ -1,35 +1,45 @@
 # Prepare
 
-# Step0
-检查准备环境
-折腾了几次，最后都没成功，找到这个帖子，是用镜像来做的
+# Step0 准备
+折腾了很久，最后发现是自己的电脑不能连外网，所以重新找了能连外网的物理机，开了账号。
 
-https://zhuanlan.zhihu.com/p/442656932?utm_id=0
+## 1.使用的是2022年的教程
+[https://pdos.csail.mit.edu/6.S081/2021/tools.html](https://pdos.csail.mit.edu/6.828/2022/schedule.html)https://pdos.csail.mit.edu/6.828/2022/schedule.html
 
-# 记录一下使用这个镜像的具体步骤
+1.按照教程配置环境
+<img width="1215" alt="image" src="https://github.com/MoXQian/MIT6.s081/assets/62004141/91dba527-9a85-458b-bd1c-eb8305f18eeb">
 
-## 1.使用的是2021年的教程
-https://pdos.csail.mit.edu/6.S081/2021/tools.html
+我的环境：Linux ubuntu 20.04
+2.配置命令：
 
-LInux CentOS7机器
-安装了docker镜像，ubuntu 20.04，
+`sudo apt-get install git build-essential gdb-multiarch qemu-system-misc gcc-riscv64-linux-gnu binutils-riscv64-linux-gnu`
 
-对了做一切之前记得update or upgrade（update和upgrade的简单区别是：一个保存一切，一个旧的不保留了）
+3.安装xv6
+<img width="1102" alt="image" src="https://github.com/MoXQian/MIT6.s081/assets/62004141/b11a1fb1-89c2-456a-a637-8d563e17d0ca">
 
-update or upgrade 这个话还不理解
+`git clone git://g.csail.mit.edu/xv6-labs-2022`
 
-# 镜像的使用
-docker images 来列出本地主机上的镜像。
-![image](https://github.com/MoXQian/MIT6.s081/assets/62004141/99dc8a68-a2e2-429d-9400-14dbc0b1822c)
+4.验证安装
+`cd xv6-labs-2022`
 
-各个选项说明:
-REPOSITORY：表示镜像的仓库源
-TAG：镜像的标签
-IMAGE ID：镜像ID
-CREATED：镜像创建时间
-SIZE：镜像大小
+```
+# in the xv6 directory
+$ make qemu
+# ... lots of output ...
+init: starting sh
+$
+```
 
-要使用该镜像来运行容器时
-docker run -t -i REPOSITORY:TAG /bin/bash
+ls 查看
 
-docker run -t -i lebronlambert/ubuntu20.04-mit6.s801-2021-initenv:latest /bin/bash
+<img width="254" alt="image" src="https://github.com/MoXQian/MIT6.s081/assets/62004141/2d907455-6a88-4bd2-b283-f7b96135d270">
+
+mac电脑
+control + p 查看正在运行的进程
+
+<img width="216" alt="image" src="https://github.com/MoXQian/MIT6.s081/assets/62004141/a6b66e87-a001-4dd2-9655-fb9eaf227431">
+
+退出：control + a 输入 x
+
+<img width="584" alt="image" src="https://github.com/MoXQian/MIT6.s081/assets/62004141/79e12061-9446-42bf-b580-f4bff31d43b0">
+
