@@ -2,22 +2,22 @@
 #include "kernel/stat.h"
 #include "user/user.h"
 
-int main(int argc, char **argv) {
-        int pp2c[2], pc2p[2];
-        pipe(pp2c);
-        pipe(pc2p);
+int main(int argc, char *argv[]){
+    int parent2child[2], child2parent[2];
+    pipe(parent2child);
+    pipe(child2parent);
 
-        if(fork() != 0) {
-                write(pp2c[1], "!", 1);
-                char buf;
-                read(pc2p[0], &buf, 1);
-                printf("%d: recetved the pong\n", getpid());
-                wait(0);
-        } else {
-                char buf;
-                read(pp2c[0], &buf, 1);
-                printf("%d: received the ping\n", getpid());
-                write(pc2p[1], &buf, 1);
-        }
-        exit(0);
+    if(fork() > 0) {    //parent process
+        write(parent2child[1], "!!", 1);
+        char buff;
+        read(child2parent[0], &buff, 1);
+        printf("%d, received pong\n", getpid());
+    } else {            //child process
+        char buff;
+        read(parent2child[0], &buff, 1);
+        printf("%d, received ping\n", getpid());
+        write(child2parent[1], "??", 1);
+    }
+    exit(0);
+
 }
